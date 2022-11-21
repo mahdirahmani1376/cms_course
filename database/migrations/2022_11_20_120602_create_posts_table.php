@@ -19,7 +19,7 @@ return new class extends Migration
 //            $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('user_id')->nullable()->constrained();
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }
