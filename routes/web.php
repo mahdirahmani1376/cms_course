@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\postsController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -19,14 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/contact',[PostsController::class,'contact']);
-
-Route::get('/find',function(){
-
-    $posts = Post::all();
-    dump($posts);
-    foreach ($posts as $post){
-        echo $post->title;
-    }
-
-});
+Route::resource('/posts',PostsController::class);
