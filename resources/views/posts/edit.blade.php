@@ -1,23 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <form method="post" action="/posts/{{ $post->id }}">
+    {!! Form::open(['method'=>'patch','route'=>['posts.update',$post->id]]) !!}
         {{ csrf_field() }}
 
-        <input type="hidden" name="_method" value="PUT">
+    {!! Form::label('title','Title:') !!}
+    {!! Form::text('title',null,['class'=>'form-control']) !!}
+    {!! Form::submit('update Post',['class'=>'btn btn-info']) !!}
 
-        <input type="text" name="title" placeholder="Enter title", value="{{ $post->title }}">
+    {!! Form::close() !!}
 
-        <input type="submit" name="submit" value="UPDATE">
-    </form>
+    {!! Form::open(['method'=>'DELETE','route'=>['posts.destroy',$post->id]]) !!}
+         {{ csrf_field() }}
+    {!! Form::submit('delete post',['class'=>'btn btn-danger']) !!}
 
-    <form method="post" action="/posts/{{ $post->id }}">
-          
-        <input type="hidden" name="_method" value="DELETE">
+    {!! Form::close() !!}
 
-        <input type="submit" value="DELETE">
-
-    </form>
 
 @endsection
 

@@ -10,12 +10,15 @@ class Post extends Model
 {
     use HasFactory;
 
+    public $directory = '/images/';
+
     protected $dates =  ['deleted_at'];
 
     protected $fillable = [
         'title',
         'content',
         'is_admin',
+        'path',
     ];
 
     public function users(){
@@ -30,5 +33,13 @@ class Post extends Model
         return $this->morphToMany('App\Tag','taggable');
     }
 
+    public static function scopeLatest($query){
+
+        return $query->orderBy('id','asc')->get();
+    }
+
+    public function getPathAttribute($value){
+        return $this->directory.$value;
+    }
 
 }
